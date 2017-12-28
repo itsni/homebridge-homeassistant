@@ -207,7 +207,7 @@ HomeAssistantFan.prototype = {
               .on('set', this.setRotationSpeed.bind(this));
 
             return [informationService, this.fanService];
-            }
+          
         } else {
             this.fanService = new Service.Fan();
             const informationService = new Service.AccessoryInformation();

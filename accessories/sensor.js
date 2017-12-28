@@ -193,8 +193,24 @@ function HomeAssistantSensorFactory(log, data, client) {
     characteristic = Characteristic.CarbonDioxideLevel;
   } else if ((typeof data.attributes.unit_of_measurement === 'string' && data.attributes.unit_of_measurement.toLowerCase() === '㎍/㎥') || data.attributes.homebridge_sensor_type === 'pm10density') {
     service = Service.AirQualitySensor;
-    characteristic = Characteristic.PM10Density;
-    transformData = function transformData(dataToTransform) {
+    characteristic = Characteristic.AirQuality;
+    transformData = function transformData(dataToTransform) { // eslint-disable-line no-shadow
+      const value = parseFloat(dataToTransform.state);
+      if (value <= 75) {
+        return 1;
+      } else if (value >= 76 && value <= 150) {
+        return 2;
+      } else if (value >= 151 && value <= 225) {
+        return 3;
+      } else if (value >= 226 && value <= 300) {
+        return 4;
+      } else if (value >= 301) {
+        return 5;
+      }
+      return 0;
+    };    
+    characteristic2 = Characteristic.PM10Density;
+    transformData2 = function transformData(dataToTransform) {
       const value = parseFloat(dataToTransform.state);
       return value;
     };

@@ -51,6 +51,10 @@ class HomeAssistantSensor {
   transformData(data) {
     return parseFloat(data.state);
   }
+  
+    transformData2(data) {
+    return parseFloat(data.state);
+  }
 
   
   onEvent(oldState, newState) {
@@ -69,7 +73,7 @@ class HomeAssistantSensor {
         .setValue(this.transformData(newState), null, 'internal');
       if (this.characteristic2) {
       this.sensorService.getCharacteristic(this.characteristic2)
-        .setValue(this.transformData(newState), null, 'internal');  
+        .setValue(this.transformData2(newState), null, 'internal');  
       }
     }
   }
@@ -203,7 +207,7 @@ function HomeAssistantSensorFactory(log, data, client) {
   } else if ((typeof data.attributes.unit_of_measurement === 'string' && data.attributes.unit_of_measurement.toLowerCase() === '㎍/㎥') || data.attributes.homebridge_sensor_type === 'pm10density') {
     service = Service.AirQualitySensor;
     characteristic2 = Characteristic.PM10Density;
-    transformData2 = function transformData(dataToTransform) {
+    transformData2 = function transformData2(dataToTransform) {
       const value2 = parseFloat(dataToTransform.state);
       return value2;
     };    

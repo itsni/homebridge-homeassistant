@@ -67,8 +67,6 @@ class HomeAssistantSensor {
     } else {
       this.sensorService.getCharacteristic(this.characteristic)
         .setValue(this.transformData(newState), null, 'internal');
-      this.sensorService.getCharacteristic(this.characteristic2)
-        .setValue(this.transformData(newState), null, 'internal');      
     }
   }
 
@@ -208,8 +206,8 @@ function HomeAssistantSensorFactory(log, data, client) {
     };    
     characteristic2 = Characteristic.PM10Density;
     transformData2 = function transformData(dataToTransform) {
-      const value = parseFloat(dataToTransform.state);
-      return value;
+      const value2 = parseFloat(dataToTransform.state);
+      return value2;
     };
   } else if ((typeof data.attributes.unit_of_measurement === 'string' && data.attributes.unit_of_measurement.toLowerCase() === 'aqi') || data.attributes.homebridge_sensor_type === 'air_quality') {
     service = Service.AirQualitySensor;

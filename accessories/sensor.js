@@ -215,7 +215,7 @@ function HomeAssistantSensorFactory(log, data, client) {
     transformData = function transformData(dataToTransform) { // eslint-disable-line no-shadow
       const value = parseFloat(dataToTransform.state);
       if (value <= 30) {
-        return 5;
+        return 1;
       } else if (value >= 31 && value <= 70) {
         return 2;
       } else if (value >= 71 && value <= 100) {

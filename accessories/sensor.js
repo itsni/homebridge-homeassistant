@@ -216,9 +216,9 @@ function HomeAssistantSensorFactory(log, data, client) {
       const value = parseFloat(dataToTransform.state);
       if (value <= 30) {
         return 1;
-      } else if (value >= 31 && value <= 80) {
+      } else if (value >= 31 && value <= 70) {
         return 2;
-      } else if (value >= 81 && value <= 100) {
+      } else if (value >= 71 && value <= 100) {
         return 3;
       } else if (value >= 101 && value <= 150) {
         return 4;
@@ -232,15 +232,15 @@ function HomeAssistantSensorFactory(log, data, client) {
     characteristic = Characteristic.AirQuality;
     transformData = function transformData(dataToTransform) { // eslint-disable-line no-shadow
       const value = parseFloat(dataToTransform.state);
-      if (value <= 75) {
+      if (value <= 30) {
         return 1;
-      } else if (value >= 76 && value <= 150) {
+      } else if (value >= 31 && value <= 70) {
         return 2;
-      } else if (value >= 151 && value <= 225) {
+      } else if (value >= 71 && value <= 100) {
         return 3;
-      } else if (value >= 226 && value <= 300) {
+      } else if (value >= 101 && value <= 150) {
         return 4;
-      } else if (value >= 301) {
+      } else if (value >= 151) {
         return 5;
       }
       return 0;

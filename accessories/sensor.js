@@ -206,7 +206,7 @@ function HomeAssistantSensorFactory(log, data, client) {
     characteristic = Characteristic.CarbonDioxideLevel;
   } else if ((typeof data.attributes.unit_of_measurement === 'string' && data.attributes.unit_of_measurement.toLowerCase() === '㎍/㎥') || data.attributes.homebridge_sensor_type === 'pm10density') {
     service = Service.AirQualitySensor;
-    characteristic2 = Characteristic.PM10Density;
+    characteristic2 = Characteristic.AirParticulateDensity;
     transformData2 = function transformData2(dataToTransform) {
       const value2 = parseFloat(dataToTransform.state);
       return value2;

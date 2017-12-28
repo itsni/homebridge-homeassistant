@@ -188,7 +188,7 @@ HomeAssistantFan.prototype = {
   },
       getServices() {
         if (this.entity_id.includes('purifier')) {
-            this.airpurifierService = new Service.AirPurifier();
+            this.airpurifierService = new Service.Lightbulb();
             const informationService = new Service.AccessoryInformation();
 
             informationService

@@ -178,8 +178,8 @@ function HomeAssistantSensorFactory(log, data, client) {
     service = Service.CarbonDioxideSensor;
     characteristic = Characteristic.CarbonDioxideLevel;
   } else if ((typeof data.attributes.unit_of_measurement === 'string' && data.attributes.unit_of_measurement.toLowerCase() === '㎍/㎥') || data.attributes.homebridge_sensor_type === 'pm10density') {
-    service = Service.AirQualitySensor;
-    characteristic = Characteristic.PM10Density;
+    service = Service.CarbonDioxideSensor;
+    characteristic = Characteristic.CarbonDioxideLevel;
   } else if ((typeof data.attributes.unit_of_measurement === 'string' && data.attributes.unit_of_measurement.toLowerCase() === 'aqi') || data.attributes.homebridge_sensor_type === 'air_quality') {
     service = Service.AirQualitySensor;
     characteristic = Characteristic.AirQuality;

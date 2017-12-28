@@ -67,6 +67,10 @@ class HomeAssistantSensor {
     } else {
       this.sensorService.getCharacteristic(this.characteristic)
         .setValue(this.transformData(newState), null, 'internal');
+      if (characteristic2) {
+      this.sensorService.getCharacteristic(this.characteristic2)
+        .setValue(this.transformData(newState), null, 'internal');  
+      }
     }
   }
 

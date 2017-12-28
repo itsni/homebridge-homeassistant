@@ -181,7 +181,7 @@ HomeAssistantFan.prototype = {
       });
     }
   },
-  if (data.attributes.homebridge_sensor_type === 'AirPurifier') {
+  if (data.attributes.homebridge_fan_type === 'AirPurifier') {
   getServices() {
         this.fanService = new Service.AirPurifier();
         const informationService = new Service.AccessoryInformation();

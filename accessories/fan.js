@@ -183,6 +183,31 @@ HomeAssistantFan.prototype = {
   },
       getServices() {
         if (this.attributes.homebridge_sensor_type === 'AirPurifier') {
+            this.fanService = new Service.Fan();
+            const informationService = new Service.AccessoryInformation();
+
+            informationService
+              .setCharacteristic(Characteristic.Manufacturer, this.mfg)
+              .setCharacteristic(Characteristic.Model, this.model)
+              .setCharacteristic(Characteristic.SerialNumber, this.serial);
+
+            this.fanService
+              .getCharacteristic(Characteristic.On)
+              .on('get', this.getPowerState.bind(this))
+              .on('set', this.setPowerState.bind(this));
+
+            this.fanService
+              .getCharacteristic(Characteristic.RotationSpeed)
+              .setProps({
+                minValue: 0,
+                maxValue: this.maxValue,
+                minStep: 1
+              })
+              .on('get', this.getRotationSpeed.bind(this))
+              .on('set', this.setRotationSpeed.bind(this));
+
+            return [informationService, this.fanService];
+            }
         } else {
             this.fanService = new Service.Fan();
             const informationService = new Service.AccessoryInformation();

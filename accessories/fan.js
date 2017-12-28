@@ -181,7 +181,7 @@ HomeAssistantFan.prototype = {
       });
     }
   },
-  if((this.entity_id.includes('purifier'))){
+  if (data.entity_id.includes('purifier')) {
   getServices() {
         this.fanService = new Service.AirPurifier();
         const informationService = new Service.AccessoryInformation();

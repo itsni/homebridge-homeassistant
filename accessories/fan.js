@@ -182,7 +182,7 @@ HomeAssistantFan.prototype = {
     }
   },
       getServices() {
-        if (data.attributes.homebridge_sensor_type === 'AirPurifier') {
+        if (data.entity_id.includes('purifier')) {
         } else {
             this.fanService = new Service.Fan();
             const informationService = new Service.AccessoryInformation();

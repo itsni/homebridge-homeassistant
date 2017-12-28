@@ -2,6 +2,7 @@
 
 let Service;
 let Characteristic;
+let Characteristic2;
 let communicationError;
 
 class HomeAssistantSensor {

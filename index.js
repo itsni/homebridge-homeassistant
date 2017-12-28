@@ -19,6 +19,7 @@ let HomeAssistantSensorFactory;
 let HomeAssistantSwitch;
 let HomeAssistantDeviceTrackerFactory;
 let HomeAssistantClimate;
+let HomeAssistantAirPurifier;
 
 function HomeAssistantPlatform(log, config, api) {
   // auth info
@@ -174,6 +175,8 @@ HomeAssistantPlatform.prototype = {
             accessory = new HomeAssistantSwitch(that.log, entity, that, 'input_boolean');
           } else if (entityType === 'fan') {
             accessory = new HomeAssistantFan(that.log, entity, that);
+          } else if (entityType === 'airpurifier') {
+            accessory = new HomeAssistantAirPurifier(that.log, entity, that);          
           } else if (entityType === 'cover') {
             accessory = HomeAssistantCoverFactory(that.log, entity, that);
           } else if (entityType === 'sensor') {
@@ -221,6 +224,7 @@ function HomebridgeHomeAssistant(homebridge) {
   HomeAssistantLock = require('./accessories/lock')(Service, Characteristic, communicationError);
   HomeAssistantMediaPlayer = require('./accessories/media_player')(Service, Characteristic, communicationError);
   HomeAssistantFan = require('./accessories/fan')(Service, Characteristic, communicationError);
+  HomeAssistantAirPurifier = require('./accessories/airpurifier')(Service, Characteristic, communicationError);  
   HomeAssistantCoverFactory = require('./accessories/cover')(Service, Characteristic, communicationError);
   HomeAssistantSensorFactory = require('./accessories/sensor')(Service, Characteristic, communicationError);
   HomeAssistantBinarySensorFactory = require('./accessories/binary_sensor')(Service, Characteristic, communicationError);

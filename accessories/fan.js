@@ -181,34 +181,65 @@ HomeAssistantFan.prototype = {
       });
     }
   },
+  if(data.entity_id.includes('purifier')){
   getServices() {
-    this.fanService = new Service.Fan();
-    const informationService = new Service.AccessoryInformation();
+        this.fanService = new Service.AirPurifier();
+        const informationService = new Service.AccessoryInformation();
 
-    informationService
-      .setCharacteristic(Characteristic.Manufacturer, this.mfg)
-      .setCharacteristic(Characteristic.Model, this.model)
-      .setCharacteristic(Characteristic.SerialNumber, this.serial);
+        informationService
+          .setCharacteristic(Characteristic.Manufacturer, this.mfg)
+          .setCharacteristic(Characteristic.Model, this.model)
+          .setCharacteristic(Characteristic.SerialNumber, this.serial);
 
-    this.fanService
-      .getCharacteristic(Characteristic.On)
-      .on('get', this.getPowerState.bind(this))
-      .on('set', this.setPowerState.bind(this));
+        this.fanService
+          .getCharacteristic(Characteristic.On)
+          .on('get', this.getPowerState.bind(this))
+          .on('set', this.setPowerState.bind(this));
 
-    this.fanService
-      .getCharacteristic(Characteristic.RotationSpeed)
-      .setProps({
-        minValue: 0,
-        maxValue: this.maxValue,
-        minStep: 1
-      })
-      .on('get', this.getRotationSpeed.bind(this))
-      .on('set', this.setRotationSpeed.bind(this));
+        this.fanService
+          .getCharacteristic(Characteristic.RotationSpeed)
+          .setProps({
+            minValue: 0,
+            maxValue: this.maxValue,
+            minStep: 1
+          })
+          .on('get', this.getRotationSpeed.bind(this))
+          .on('set', this.setRotationSpeed.bind(this));
 
-    return [informationService, this.fanService];
-  },
+        return [informationService, this.fanService];
+      },
 
-};
+    };    
+  } else {
+      getServices() {
+        this.fanService = new Service.Fan();
+        const informationService = new Service.AccessoryInformation();
+
+        informationService
+          .setCharacteristic(Characteristic.Manufacturer, this.mfg)
+          .setCharacteristic(Characteristic.Model, this.model)
+          .setCharacteristic(Characteristic.SerialNumber, this.serial);
+
+        this.fanService
+          .getCharacteristic(Characteristic.On)
+          .on('get', this.getPowerState.bind(this))
+          .on('set', this.setPowerState.bind(this));
+
+        this.fanService
+          .getCharacteristic(Characteristic.RotationSpeed)
+          .setProps({
+            minValue: 0,
+            maxValue: this.maxValue,
+            minStep: 1
+          })
+          .on('get', this.getRotationSpeed.bind(this))
+          .on('set', this.setRotationSpeed.bind(this));
+
+        return [informationService, this.fanService];
+      },
+
+    };
+}
 
 function HomeAssistantFanPlatform(oService, oCharacteristic, oCommunicationError) {
   Service = oService;

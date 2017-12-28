@@ -52,9 +52,6 @@ class HomeAssistantSensor {
     return parseFloat(data.state);
   }
 
-  transformData2(data) {
-    return parseFloat(data.state);
-  }  
   
   onEvent(oldState, newState) {
     if (this.service === Service.CarbonDioxideSensor) {
@@ -71,7 +68,7 @@ class HomeAssistantSensor {
       this.sensorService.getCharacteristic(this.characteristic)
         .setValue(this.transformData(newState), null, 'internal');
       this.sensorService.getCharacteristic(this.characteristic2)
-        .setValue(this.transformData2(newState), null, 'internal');      
+        .setValue(this.transformData(newState), null, 'internal');      
     }
   }
 

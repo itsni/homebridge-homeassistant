@@ -182,7 +182,7 @@ HomeAssistantFan.prototype = {
     }
   },
       getServices() {
-        if (data.entity_id.includes('purifier')) {
+        if (this.entity_id.includes('purifier')) {
         } else {
             this.fanService = new Service.Fan();
             const informationService = new Service.AccessoryInformation();

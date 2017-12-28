@@ -188,7 +188,7 @@ HomeAssistantFan.prototype = {
 
             informationService
               .setCharacteristic(Characteristic.Manufacturer, this.mfg)
-              .setCharacteristic(Characteristic.Model, AirPurifier)
+              .setCharacteristic(Characteristic.Model, this.model)
               .setCharacteristic(Characteristic.SerialNumber, this.serial);
 
             this.fanService

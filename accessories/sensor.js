@@ -5,7 +5,7 @@ let Characteristic;
 let communicationError;
 
 class HomeAssistantSensor {
-  constructor(log, data, client, service, characteristic, transformData, transformData2) {
+  constructor(log, data, client, service, characteristic, transformData, characteristic2, transformData2) {
     // device info
     this.data = data;
     this.entity_id = data.entity_id;
@@ -49,6 +49,10 @@ class HomeAssistantSensor {
     return parseFloat(data.state);
   }
 
+  transformData2(data) {
+    return parseFloat(data.state);
+  }  
+  
   onEvent(oldState, newState) {
     if (this.service === Service.CarbonDioxideSensor) {
       const transformed = this.transformData(newState);
@@ -63,6 +67,8 @@ class HomeAssistantSensor {
     } else {
       this.sensorService.getCharacteristic(this.characteristic)
         .setValue(this.transformData(newState), null, 'internal');
+      this.sensorService.getCharacteristic(this.characteristic2)
+        .setValue(this.transformData2(newState), null, 'internal');      
     }
   }
 
@@ -209,7 +215,7 @@ function HomeAssistantSensorFactory(log, data, client) {
     return null;
   }
 
-  return new HomeAssistantSensor(log, data, client, service, characteristic, transformData, transformData2);
+  return new HomeAssistantSensor(log, data, client, service, characteristic, transformData, characteristic2, transformData2);
 }
 
 function HomeAssistantSensorPlatform(oService, oCharacteristic, oCommunicationError) {

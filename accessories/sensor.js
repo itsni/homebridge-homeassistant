@@ -36,6 +36,9 @@ class HomeAssistantSensor {
     if (transformData) {
       this.transformData = transformData;
     }
+    if (characteristic2) {
+      this.characteristic2 = characteristic2;
+    }        
     if (transformData2) {
       this.transformData2 = transformData2;
     }    

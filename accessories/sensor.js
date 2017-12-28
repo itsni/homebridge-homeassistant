@@ -162,6 +162,8 @@ function HomeAssistantSensorFactory(log, data, client) {
   let service;
   let characteristic;
   let transformData;
+  let characteristic2;
+  let transformData2; 
   if (data.attributes.unit_of_measurement === '°C'
       || data.attributes.unit_of_measurement === '℃'
       || data.attributes.unit_of_measurement === '°F'

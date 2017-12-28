@@ -188,7 +188,7 @@ HomeAssistantFan.prototype = {
   },
       getServices() {
         if (this.entity_id.includes('purifier')) {
-            this.fanService = new Service.AirPurifier();
+            this.airpurifierService = new Service.AirPurifier();
             const informationService = new Service.AccessoryInformation();
 
             informationService
@@ -196,12 +196,12 @@ HomeAssistantFan.prototype = {
               .setCharacteristic(Characteristic.Model, this.model)
               .setCharacteristic(Characteristic.SerialNumber, this.serial);
 
-            this.fanService
+            this.airpurifierService
               .getCharacteristic(Characteristic.On)
               .on('get', this.getPowerState.bind(this))
               .on('set', this.setPowerState.bind(this));
 
-            this.fanService
+            this.airpurifierService
               .getCharacteristic(Characteristic.RotationSpeed)
               .setProps({
                 minValue: 0,
@@ -211,7 +211,7 @@ HomeAssistantFan.prototype = {
               .on('get', this.getRotationSpeed.bind(this))
               .on('set', this.setRotationSpeed.bind(this));
 
-            return [informationService, this.fanService];
+            return [informationService, this.airpurifierService];
           
         } else {
             this.fanService = new Service.Fan();

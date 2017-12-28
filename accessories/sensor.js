@@ -5,7 +5,7 @@ let Characteristic;
 let communicationError;
 
 class HomeAssistantSensor {
-  constructor(log, data, client, service, characteristic, transformData) {
+  constructor(log, data, client, service, characteristic, transformData, characteristic2, transformData2) {
     // device info
     this.data = data;
     this.entity_id = data.entity_id;
@@ -36,6 +36,12 @@ class HomeAssistantSensor {
     if (transformData) {
       this.transformData = transformData;
     }
+    if (characteristic2) {
+      this.characteristic2 = characteristic2;
+    }
+    if (transformData2) {
+      this.transformData2 = transformData2;
+    }    
     this.client = client;
     this.log = log;
     this.batterySource = data.attributes.homebridge_battery_source;
@@ -206,7 +212,7 @@ function HomeAssistantSensorFactory(log, data, client) {
     return null;
   }
 
-  return new HomeAssistantSensor(log, data, client, service, characteristic, transformData);
+  return new HomeAssistantSensor(log, data, client, service, characteristic, transformData, characteristic2, transformData2);
 }
 
 function HomeAssistantSensorPlatform(oService, oCharacteristic, oCommunicationError) {

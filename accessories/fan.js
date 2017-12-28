@@ -182,7 +182,7 @@ HomeAssistantFan.prototype = {
     }
   },
   getServices() {
-    this.fanService = new Service.Fan();
+    this.fanService = new Service.AirPurifier();
     const informationService = new Service.AccessoryInformation();
 
     informationService
